@@ -1,0 +1,26 @@
+{
+  "name": "@daaku/flat-async-it",
+  "author": "Naitik Shah <n@daaku.org>",
+  "version": "0.1.0",
+  "description": "Flatten promises, iterables and async iterables.",
+  "repository": "git@github.com:daaku/flat-async-it",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "deploy": "npm publish --access=public",
+    "prepare": "tsc"
+  },
+  "keywords": ["async", "iterable", "functional"],
+  "peerDependencies": {
+    "typescript": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.0.4"
+  }
+}
