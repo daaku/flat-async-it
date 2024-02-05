@@ -13,6 +13,10 @@ test('empty array', async () => {
   expect(await collect(flat([]))).toEqual([])
 })
 
+test('multiple empty arrays', async () => {
+  expect(await collect(flat([[], [[]]]))).toEqual([])
+})
+
 test('resolved promises', async () => {
   expect(await collect(flat([Promise.resolve(1), 2]))).toEqual([1, 2])
 })
