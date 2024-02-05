@@ -1,21 +1,25 @@
 type Recursive<T> = T | Awaited<T> | Iterable<T> | AsyncIterable<T>
 
-export async function* flat<T>(e: Recursive<T>): AsyncGenerator<T> {
+export async function* flat<T>(
+  e: Recursive<T | Recursive<T>>,
+): AsyncGenerator<T> {
   // await the promise, if any
   let v = await e
 
-  if (v?.[Symbol.asyncIterator]) {
-    for await (const sub of v) {
-      yield* flat(sub)
+  if (v && typeof v === 'object') {
+    if (Symbol.asyncIterator in v) {
+      for await (const sub of v) {
+        yield* flat(sub)
+      }
+      return
     }
-    return
-  }
 
-  if (v?.[Symbol.iterator]) {
-    for (const sub of v) {
-      yield* flat(sub)
+    if (Symbol.iterator in v) {
+      for (const sub of v) {
+        yield* flat(sub)
+      }
+      return
     }
-    return
   }
 
   // otherwise itself
