@@ -34,7 +34,7 @@ test('two levels of async iterators with promises', async () => {
   expect(await collect(flat(two()))).toEqual([1, 2, 3, 4])
 })
 
-test('mixed array 1', async () => {
+test('array of arrays, literals and promises', async () => {
   const thing = [
     1,
     Promise.resolve(2),
@@ -44,7 +44,7 @@ test('mixed array 1', async () => {
   expect(await collect(flat(thing))).toEqual([1, 2, 3, 4, 5, 6])
 })
 
-test('mixed array 2', async () => {
+test('array of function literals', async () => {
   const thing = [
     1,
     (async () => 2)(),
